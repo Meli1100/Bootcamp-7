@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Website</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                    font-family: "Roboto", sans-serif;
+            }
+            .menu {
+                display: flex;
+                justify-content: space-between;
+                background-color: antiquewhite; 
+                background: #EEAECA;
+                background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+                padding: 10px;
+                color: black;
+                position: sticky;
+                top: 0;
+            }
+            .menu a {
+                color: black;
+                text-decoration: none;
+                margin-left: 15px;
+            }
+
+            #header {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+            }
+
+            #header .welcome-text {
+                order: 1;
+            }
+
+            #header img {
+                order: 2;
+            }
+
+            @media (max-width: 768px) {
+                #header {
+                    flex-direction: column;
+                }
+
+                #header .welcome-text {
+                    order: 2;
+                }
+
+                #header img {
+                    order: 1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="max-width: 1100px; margin: auto;">
+            <!-- SECTION 1 : MENU -->
+            <div class="menu">
+                <div>
+                    <b>My Website</b>
+                </div>
+                <div>
+                    <a href="#header">Header</a>
+                    <a href="#biodata">Biodata</a>
+                    <a href="#portofolio">Portofolio</a>
+                </div>
+            </div>
+
+            <!-- SECTION 2 : HEADER (2 KOLOM) -->
+            <div id="header">
+                <!-- Kolom Kiri -->
+                <div class="welcome-text">
+                    <h2>Selamat Datang di Website Saya</h2>
+                    <p>
+                        Ini adalah contoh header dengan dua kolom.
+                        Kolom kiri berisi teks seperti ini.
+                    </p>
+                    <button>Pelajari Lebih Lanjut</button>
+                </div>
+
+                <!-- Kolom Kanan -->
+                <div>
+                    <img src="image/1754922501_5ad825af084cccd577da.avif" 
+                        alt="Gambar Header" width="300" height="auto">
+                </div>
+            </div>
+
+            <!-- SECTION 3 : BIODATA -->
+            <table id="biodata" border="1" width="100%" cellpadding="10">
+                <tr>
+                    <td colspan="3" align="center">
+                        <h2>About Me</h2>
+                        <p>A brief introduction about myself</p>
+                    </td>
+                </tr>
+
+                <!-- Baris 1 -->
+                <tr align="center">
+                    <td>Full Name</td>
+                    <td>Education</td>
+                    <td>Pekerjaan</td>
+                </tr>
+
+                <!-- Baris 2 -->
+                <tr align="center">
+                    <td>Contact</td>
+                    <td>Hobi</td>
+                    <td>Alamat</td>
+                </tr>
+            </table>
+
+            <!-- SECTION 4 : PORTOFOLIO-->
+            <table id="portofolio" border="1" width="100%" cellpadding="10">
+                <tr>
+                    <td colspan="3" align="center">
+                        <h2>Portofolio</h2>
+                    </td>
+                </tr>
+
+                <tr align="center">
+                    <!-- Proyek 1 -->
+                    <td>
+                        <img src="https://mediaindonesia.gumlet.io/news/2025/08/11/1754922501_5ad825af084cccd577da.jpg?w=376&dpr=2.6" width="300" height="auto"><br><br>
+                        <b>Proyek 1</b><br>
+                        Deskripsi proyek 1.
+                    </td>
+
+                    <!-- Proyek 2 -->
+                    <td>
+                        <img src="https://mediaindonesia.gumlet.io/news/2025/08/11/1754922501_5ad825af084cccd577da.jpg?w=376&dpr=2.6" width="300" height="auto"><br><br>
+                        <b>Proyek 2</b><br>
+                        Deskripsi proyek 2.
+                    </td>
+
+                    <!-- Proyek 3 --> 
+                    <td>
+                        <img src="https://mediaindonesia.gumlet.io/news/2025/08/11/1754922501_5ad825af084cccd577da.jpg?w=376&dpr=2.6" width="300" height="auto"><br><br>
+                        <b>Proyek 3</b><br>
+                        Deskripsi Proyek 3.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+
