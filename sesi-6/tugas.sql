@@ -7,9 +7,9 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+BEGIN TRANSACTION;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,19 +27,19 @@ SET time_zone = "+00:00";
 -- Table structure for table `ecommerce_db`
 --
 
-CREATE TABLE `ecommerce_db` (
-  `id` int(11) NOT NULL,
-  `nama_produk` varchar(255) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `deskripsi` text NOT NULL,
-  `stok` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE [ecommerce_db] (
+  [id] int NOT NULL,
+  [nama_produk] varchar(255) NOT NULL,
+  [harga] int NOT NULL,
+  [deskripsi] text NOT NULL,
+  [stok] int NOT NULL
+);
 
 --
 -- Dumping data for table `ecommerce_db`
 --
 
-INSERT INTO `ecommerce_db` (`id`, `nama_produk`, `harga`, `deskripsi`, `stok`) VALUES
+INSERT INTO [ecommerce_db] ([id], [nama_produk], [harga], [deskripsi], [stok]) VALUES
 (1, 'Laptop HP Pavilion Gaming 15', 15000000, 'Laptop gaming dengan performa tangguh dengan RAM 16GB SSD 512GB', 10),
 (2, 'MacBook Pro M4', 34000000, 'Laptop canggih performa tinggi dengan RAM 32GB SSD 1TB', 5),
 (3, 'Kaos Polos', 100000, 'Kaos polos dengan bahan katun berkualitas tinggi', 20),
@@ -51,19 +51,19 @@ INSERT INTO `ecommerce_db` (`id`, `nama_produk`, `harga`, `deskripsi`, `stok`) V
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE [orders] (
+  [order_id] int NOT NULL,
+  [user_id] int NOT NULL,
+  [product_id] int NOT NULL,
+  [quantity] int NOT NULL,
+  [total] int NOT NULL
+);
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `quantity`, `total`) VALUES
+INSERT INTO [orders] ([order_id], [user_id], [product_id], [quantity], [total]) VALUES
 (1, 1, 2, 1, 34000000);
 
 -- --------------------------------------------------------
@@ -72,18 +72,18 @@ INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `quantity`, `total`) 
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE [users] (
+  [id] int NOT NULL,
+  [nama] varchar(255) NOT NULL,
+  [email] varchar(255) NOT NULL,
+  [password] varchar(255) NOT NULL
+);
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `email`, `password`) VALUES
+INSERT INTO [users] ([id], [nama], [email], [password]) VALUES
 (1, 'Olin Jane', 'olin@gmail.com', 'Olinjane00'),
 (2, 'Fasya Hasbi', 'hasbi@gmail.com', 'fsyhsb11');
 
@@ -94,20 +94,20 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`) VALUES
 --
 -- Indexes for table `ecommerce_db`
 --
-ALTER TABLE `ecommerce_db`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE [ecommerce_db]
+  ADD PRIMARY KEY ([id]);
 
 --
 -- Indexes for table `orders`
 --
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
+ALTER TABLE [orders]
+  ADD PRIMARY KEY ([order_id]);
 
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE [users]
+  ADD PRIMARY KEY ([id]);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -116,20 +116,20 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `ecommerce_db`
 --
-ALTER TABLE `ecommerce_db`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE [ecommerce_db]
+  ADD CONSTRAINT PK_ecommerce_db PRIMARY KEY ([id]);
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE [orders]
+  ADD CONSTRAINT PK_orders PRIMARY KEY ([order_id]);
 
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE [users]
+  ADD CONSTRAINT PK_users PRIMARY KEY ([id]);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
@@ -141,8 +141,8 @@ COMMIT;
 
 INSERT INTO products (nama_produk, harga, deskripsi, stok) VALUES ('Keyboard Gaming', 350000, 'Keyboard RGB Mechanical', 25);
 
-SELECT * FROM `ecommerce_db`;
+SELECT * FROM [ecommerce_db];
 
-UPDATE `ecommerce_db` SET `stok` = `stok` - 1 WHERE `id` = 2;
+UPDATE [ecommerce_db] SET [stok] = [stok] - 1 WHERE [id] = 2;
 
-DELETE FROM `orders` WHERE `order_id` = 1;
+DELETE FROM [orders] WHERE [order_id] = 1;
