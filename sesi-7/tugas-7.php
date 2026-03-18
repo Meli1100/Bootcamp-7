@@ -1,37 +1,3 @@
-<?php
-// server-side validation and result display for product form
-$errors = [];
-$values = ['nama' => '', 'price' => '', 'description' => '', 'category' => '', 'stock' => ''];
-$valid = false;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // collect and trim
-    $values['nama'] = trim($_POST['nama'] ?? '');
-    $values['price'] = trim($_POST['price'] ?? '');
-    $values['description'] = trim($_POST['description'] ?? '');
-    $values['category'] = trim($_POST['category'] ?? '');
-    $values['stock'] = trim($_POST['stock'] ?? '');
-
-    // validation rules
-    if ($values['nama'] === '') {
-        $errors['nama'] = 'Name is required.';
-    }
-    if ($values['price'] === '' || !is_numeric($values['price']) || floatval($values['price']) <= 0) {
-        $errors['price'] = 'Price must be a number greater than 0.';
-    }
-    if ($values['description'] === '') {
-        $errors['description'] = 'Description is required.';
-    }
-    if ($values['category'] === '') {
-        $errors['category'] = 'Please select a category.';
-    }
-    if ($values['stock'] === '' || !ctype_digit($values['stock']) || intval($values['stock']) < 0) {
-        $errors['stock'] = 'Stock must be a non-negative integer.';
-    }
-
-    $valid = empty($errors);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
