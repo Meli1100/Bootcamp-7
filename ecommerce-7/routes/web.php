@@ -22,9 +22,9 @@ Route::get('/products', function () {
 Route::get('/product_detail', [HomeController::class, 'productDetail']);
 
 Route::get('/cart', function () {
-    return view('cart');
+    echo "Cart Page";
 });
 
 Route::get('/checkout', function () {
-    return view('checkout');
+    echo "Checkout Page";
 });
