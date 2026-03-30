@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
@@ -22,11 +22,7 @@ Route::get('/products', function () {
     return view('product');
 });
 
-Route::get('/product_detail', [HomeController::class, 'productDetail']);
-
-Route::get('/cart', function () {
-    echo "Cart Page";
-});
+Route::get('/product_detail/{slug}', [HomeController::class, 'productDetail'])->name('product.detail');
 
 Route::get('/checkout', function () {
     return view('checkout');

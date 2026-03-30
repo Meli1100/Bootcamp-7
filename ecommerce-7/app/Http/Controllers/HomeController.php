@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,46 +12,32 @@ class HomeController extends Controller
      * 
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = [
-            [
-                'name' => 'Product 1',
-                'price' => 100000,
-                'image' => 'https://img.lazcdn.com/g/p/979fc2a3327d6cfd87ed74bfdc8beb26.jpg_720x720q80.jpg'
-            ],
-            [
-                'name' => 'Product 2',
-                'price' => 250000,
-                'image' => 'https://img.lazcdn.com/g/p/0e448864b6f3c0c80df9731d6c97a2be.jpg_720x720q80.jpg'
-            ],
-            [
-                'name' => 'Product 3',
-                'price' => 150000,
-                'image' => 'https://img.lazcdn.com/g/p/7b8c9e5d94dcce4e8b1f2e8f32a02766.jpg_720x720q80.jpg'
-            ]
-        ];
+        $search     = $request->input('search');
+        $products   = Product::with('product_category')
+                        ->when($search, function ($query, $search) {
+                            return $query->where('name', 'like', "%{$search}%");
+                        })
+                        ->orderBy('price', 'asc')
+                        // ->where('stock', '>', 10000)
+                        ->paginate(6);
 
-        $accordionItems = [
-            [
-                'title' => 'Accordion Item #1',
-                'body' => 'content for accordion item #1.'
-            ],
-            [
-                'title' => 'Accordion Item #2',
-                'body' => 'content for accordion item #2.'
-            ],
-            [
-                'title' => 'Accordion Item #3',
-                'body' => 'content for accordion item #3.'
-            ]
-        ];
-        return view('home', compact('products', 'accordionItems'));
+        return view('home', compact('products'));
     }
 
-    public function productDetail()
+    public function productDetail(string $slug)
     {
-        return view('product_detail');
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        $product_recommendations = Product::where('product_category_id', 
+        $product->product_category_id)
+                                        ->where('id', '!=', $product->id)
+                                        ->inRandomOrder()
+                                        ->take(4)
+                                        ->get();
+
+        return view('product_detail', compact('product', 'product_recommendations'));
     }
 
 }
