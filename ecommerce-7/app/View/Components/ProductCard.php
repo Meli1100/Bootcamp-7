@@ -15,7 +15,7 @@ class ProductCard extends Component
         public $name,
         public $price,
         public $image,
-        public $slug 
+        public $slug
     )
     {
         //
