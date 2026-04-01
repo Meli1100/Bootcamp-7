@@ -12,7 +12,10 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $productCategories = ProductCategory::withCount('products')
+                                ->withSum('products as total_stock', 'stock')
+                                ->get();
+        return view('admin.product-category.index', compact('productCategories'));
     }
 
     /**
@@ -20,7 +23,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product-category.create');
     }
 
     /**
@@ -28,7 +31,18 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:product_categories',
+            'description' => 'nullable|string',
+        ]);
+
+        // Generate slug dari name
+        $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']);
+
+        ProductCategory::create($validated);
+
+        return redirect()->route('admin.product-categories.index')
+                        ->with('success', 'Kategori produk berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +58,7 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-        //
+        return view('admin.product-category.edit', compact('productCategory'));
     }
 
     /**
@@ -52,7 +66,18 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:product_categories,name,' . $productCategory->id,
+            'description' => 'nullable|string',
+        ]);
+
+        // Generate slug dari name
+        $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']);
+
+        $productCategory->update($validated);
+
+        return redirect()->route('admin.product-categories.index')
+                        ->with('success', 'Kategori produk berhasil diperbarui');
     }
 
     /**
@@ -60,6 +85,11 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        $productCategory->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Kategori produk berhasil dihapus'
+        ]);
     }
 }
