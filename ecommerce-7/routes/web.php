@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
@@ -21,16 +22,12 @@ Route::get('/checkout', function () {
     return view('checkout');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', function () {
-            echo "Admin Dashboard";
-        });
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('products', ProductController::class);
         Route::resource('product-categories', ProductCategoryController::class);
     });
