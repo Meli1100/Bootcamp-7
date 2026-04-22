@@ -12,6 +12,29 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('cart.index') }}">Keranjang</a>
         </li>
+        @auth
+          @if(Auth::user()->role === 'admin')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+          </li>
+          @endif
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+              @csrf
+              <button type="submit" class="nav-link btn btn-link">Logout</button>
+            </form>
+          </li>
+        @else
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('register') }}">Register</a>
+          </li>
+        @endauth
       </ul>
       <form action="{{ route('home') }}" method="GET" class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ request('search') }}"/>
