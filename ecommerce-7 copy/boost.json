@@ -1,0 +1,11 @@
+{
+    "agents": [
+        "copilot",
+        "cursor"
+    ],
+    "guidelines": true,
+    "skills": [
+        "pest-testing",
+        "tailwindcss-development"
+    ]
+}
